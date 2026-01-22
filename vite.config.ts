@@ -100,7 +100,13 @@ export default defineConfig(({ mode }) => {
                 src: 'android/android-launchericon-512-512.png',
                 sizes: '512x512',
                 type: 'image/png',
-                purpose: 'any maskable' 
+                purpose: 'any'
+              },
+              {
+                src: 'android/android-launchericon-512-512.png',
+                sizes: '512x512',
+                type: 'image/png',
+                purpose: 'maskable'
               }
             ],
             // Added the 9 screenshots you uploaded
