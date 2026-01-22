@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => {
         react(),
         VitePWA({
           registerType: 'autoUpdate',
+          // Workbox config ensures the service worker is generated correctly
           workbox: {
             globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
             cleanupOutdatedCaches: true,
@@ -102,7 +103,72 @@ export default defineConfig(({ mode }) => {
                 purpose: 'any maskable' 
               }
             ],
-            screenshots: []
+            // Added the 9 screenshots you uploaded
+            screenshots: [
+              {
+                src: 'screenshot1.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'Dashboard Home'
+              },
+              {
+                src: 'screenshot2.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'User Profile'
+              },
+              {
+                src: 'screenshot3.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'Features List'
+              },
+              {
+                src: 'screenshot4.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'Attendance Tracking'
+              },
+              {
+                src: 'screenshot5.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'School Admin'
+              },
+              {
+                src: 'screenshot6.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'Transport Map'
+              },
+              {
+                src: 'screenshot7.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'Homework Portal'
+              },
+              {
+                src: 'screenshot8.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'Gallery'
+              },
+              {
+                src: 'screenshot9.png',
+                sizes: '1080x1920',
+                type: 'image/png',
+                form_factor: 'narrow',
+                label: 'Reports'
+              }
+            ]
           }
         })
       ],
