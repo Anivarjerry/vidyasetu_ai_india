@@ -15,17 +15,44 @@ export default defineConfig(({ mode }) => {
         react(),
         VitePWA({
           registerType: 'autoUpdate',
-          // Workbox config enables the Service Worker (Critical for PWA Score)
           workbox: {
             globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
             cleanupOutdatedCaches: true,
             clientsClaim: true,
             skipWaiting: true,
+            runtimeCaching: [
+              {
+                urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+                handler: 'CacheFirst',
+                options: {
+                  cacheName: 'google-fonts-cache',
+                  expiration: {
+                    maxEntries: 10,
+                    maxAgeSeconds: 60 * 60 * 24 * 365
+                  },
+                  cacheableResponse: {
+                    statuses: [0, 200]
+                  }
+                }
+              },
+              {
+                urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+                handler: 'CacheFirst',
+                options: {
+                  cacheName: 'gstatic-fonts-cache',
+                  expiration: {
+                    maxEntries: 10,
+                    maxAgeSeconds: 60 * 60 * 24 * 365
+                  },
+                  cacheableResponse: {
+                    statuses: [0, 200]
+                  }
+                }
+              }
+            ]
           },
-          // Only include assets that actually exist in your public folder
           includeAssets: ['android/android-launchericon-192-192.png', 'ios/180.png'], 
           manifest: {
-            // Essential PWA Fields for Stores
             id: '/',
             start_url: '/',
             scope: '/',
@@ -66,22 +93,15 @@ export default defineConfig(({ mode }) => {
                 src: 'android/android-launchericon-192-192.png',
                 sizes: '192x192',
                 type: 'image/png',
-                purpose: 'any' // Standard icon
+                purpose: 'any'
               },
               {
                 src: 'android/android-launchericon-512-512.png',
                 sizes: '512x512',
                 type: 'image/png',
-                purpose: 'any' // Standard large icon
-              },
-              {
-                src: 'android/android-launchericon-512-512.png',
-                sizes: '512x512',
-                type: 'image/png',
-                purpose: 'maskable' // Adaptive icon for Android (Round/Square auto-fit)
+                purpose: 'any maskable' 
               }
             ],
-            // Screenshots are left empty as requested, you can upload them manually in PWABuilder
             screenshots: []
           }
         })
