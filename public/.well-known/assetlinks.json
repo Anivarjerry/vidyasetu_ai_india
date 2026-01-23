@@ -1,8 +1,0 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "app.vercel.vidyasetu_ai_india.twa",
-    "sha256_cert_fingerprints": ["49:7B:DD:90:9F:29:F8:88:AC:F6:1E:D5:88:56:D5:88:EC:F7:84:14:0E:AE:AE:7A:49:85:21:11:5B:DE:92:0F"]
-  }
-}]

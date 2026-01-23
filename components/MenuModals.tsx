@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { useThemeLanguage } from '../contexts/ThemeLanguageContext';
 import { Modal } from './Modal';
 import { Button } from './Button';
-import { Moon, Sun, Info, Phone, Mail, MessageCircle, Check, Users, Sparkles, Trophy, Target } from 'lucide-react';
+import { Moon, Sun, Info, Phone, Mail, MessageCircle, Check, Users, Sparkles, Trophy, Target, FileText, ExternalLink, Shield } from 'lucide-react';
 
 // --- SETTINGS MODAL ---
 interface SettingsModalProps {
@@ -99,6 +100,52 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
                 {t('apply_changes')}
             </button>
         </div>
+      </div>
+    </Modal>
+  );
+};
+
+// --- POLICIES MODAL (New) ---
+interface PoliciesModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const PoliciesModal: React.FC<PoliciesModalProps> = ({ isOpen, onClose }) => {
+  const links = [
+    { label: 'Contact Us', url: '/contact-us.html' },
+    { label: 'Terms & Conditions', url: '/terms-conditions.html' },
+    { label: 'Privacy Policy', url: '/privacy-policy.html' },
+    { label: 'Refund Policy', url: '/refund-policy.html' },
+    { label: 'Shipping Policy', url: '/shipping-policy.html' }
+  ];
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title="LEGAL & POLICIES">
+      <div className="space-y-3">
+        <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 mb-4">
+           <div className="w-10 h-10 rounded-xl bg-white dark:bg-dark-900 flex items-center justify-center text-slate-400 shadow-sm"><Shield size={20} /></div>
+           <div>
+              <h4 className="text-xs font-black text-slate-800 dark:text-white uppercase">Compliance</h4>
+              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">VidyaSetu AI • RJ-16-0040771</p>
+           </div>
+        </div>
+
+        {links.map((link, idx) => (
+          <a 
+            key={idx} 
+            href={link.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center justify-between p-4 bg-white dark:bg-dark-900 border border-slate-100 dark:border-white/5 rounded-2xl shadow-sm active:scale-95 transition-all group hover:border-brand-500"
+          >
+            <div className="flex items-center gap-3">
+               <FileText size={16} className="text-slate-400 group-hover:text-brand-500 transition-colors" />
+               <span className="text-xs font-bold text-slate-700 dark:text-white uppercase tracking-tight">{link.label}</span>
+            </div>
+            <ExternalLink size={14} className="text-slate-300 group-hover:text-brand-500" />
+          </a>
+        ))}
       </div>
     </Modal>
   );

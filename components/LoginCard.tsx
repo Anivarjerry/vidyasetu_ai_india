@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { LoginRequest } from '../types';
 import { Button } from './Button';
-import { School, Smartphone, Eye, AlertCircle, Key, UserCog, Sparkles, Info, HelpCircle } from 'lucide-react';
+import { School, Smartphone, Eye, AlertCircle, Key, UserCog, Sparkles, Info, HelpCircle, FileText } from 'lucide-react';
 import { useThemeLanguage } from '../contexts/ThemeLanguageContext';
-import { AboutModal, HelpModal } from './MenuModals';
+import { AboutModal, HelpModal, PoliciesModal } from './MenuModals';
 
 interface LoginCardProps {
   onSubmit: (data: LoginRequest) => void;
@@ -17,6 +17,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onSubmit, isLoading, error
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isPoliciesOpen, setIsPoliciesOpen] = useState(false); // New state for policies modal
   const [formData, setFormData] = useState<LoginRequest>({
     school_id: '',
     mobile: '',
@@ -141,14 +142,21 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onSubmit, isLoading, error
                 {isAdminMode ? t('staff_mode') : t('admin_port')}
              </button>
 
-             {/* Footer Links: About & Help */}
-             <div className="flex items-center justify-center gap-8 border-t border-slate-50 dark:border-white/5 pt-5">
+             {/* Footer Links: About, Help & Legal */}
+             <div className="flex items-center justify-center gap-6 border-t border-slate-50 dark:border-white/5 pt-5">
                 <button 
                   type="button" 
                   onClick={() => setIsAboutOpen(true)}
                   className="flex items-center gap-1.5 text-[9px] font-black text-slate-400 dark:text-slate-500 hover:text-brand-500 uppercase tracking-[0.2em] transition-all active:scale-95"
                 >
-                  <Info size={12} /> {t('about')}?
+                  <Info size={12} /> {t('about')}
+                </button>
+                <button 
+                  type="button" 
+                  onClick={() => setIsPoliciesOpen(true)}
+                  className="flex items-center gap-1.5 text-[9px] font-black text-slate-400 dark:text-slate-500 hover:text-brand-500 uppercase tracking-[0.2em] transition-all active:scale-95"
+                >
+                  <FileText size={12} /> Legal
                 </button>
                 <button 
                   type="button" 
@@ -170,6 +178,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onSubmit, isLoading, error
 
       <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
       <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+      <PoliciesModal isOpen={isPoliciesOpen} onClose={() => setIsPoliciesOpen(false)} />
     </div>
   );
 };
