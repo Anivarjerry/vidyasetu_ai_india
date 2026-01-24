@@ -8,8 +8,8 @@
     <meta name="description" content="School Management System" />
     <meta name="google-site-verification" content="7trvpsGQ27VmYnR6enGkTPfDKqpeT2Hv7sEQMOYsU5s" />
     
-    <!-- Initial Theme Color (Blue to match splash fill) -->
-    <meta name="theme-color" content="#298FC2">
+    <!-- Initial Theme Color (Green to match new splash) -->
+    <meta name="theme-color" content="#10b981">
     
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="/android/android-launchericon-192-192.png">
@@ -77,7 +77,7 @@
         :root {
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
-            --brand-blue: #298FC2;
+            --brand-green: #10b981; /* Emerald 500 */
         }
         html, body {
             margin: 0;
@@ -113,7 +113,24 @@
             background-color: #020617;
         }
 
-        /* The Blue Ripple Effect */
+        /* The SVG Logo Container */
+        #initial-logo-svg {
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+            position: absolute;
+            background: #ecfdf5; /* Light Green Background */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+            /* Fade out as green expands */
+            animation: fade-out 0.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* The Green Ripple Effect */
         #color-expander {
             position: absolute;
             top: 50%;
@@ -121,14 +138,14 @@
             transform: translate(-50%, -50%);
             width: 0px;
             height: 0px;
-            background-color: var(--brand-blue);
+            background-color: var(--brand-green);
             border-radius: 50%;
             z-index: 1;
             animation: expand-fill 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             animation-delay: 0.1s; 
         }
 
-        /* Container for Content (Centered vertically) */
+        /* Container for Content */
         #splash-content {
             position: relative;
             z-index: 10;
@@ -137,8 +154,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Centers everything vertically */
-            gap: 40px; /* Space between Title and Grid */
+            justify-content: center;
+            gap: 40px;
             opacity: 0;
             animation: content-reveal 0.8s ease-out forwards;
             animation-delay: 0.6s;
@@ -146,11 +163,11 @@
 
         #app-title {
             font-family: 'Inter', sans-serif;
-            font-weight: 800; /* Slightly lighter than 900 for cleaner look */
-            font-size: 24px; /* Reduced from 32px */
+            font-weight: 800;
+            font-size: 24px;
             color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: 0.2em; /* Increased spacing */
+            letter-spacing: 0.2em;
             text-align: center;
             text-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
@@ -158,8 +175,8 @@
         /* 2x2 GRID LAYOUT */
         #feature-icons {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 Columns */
-            gap: 30px; /* Spacing between grid items */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
             padding: 20px;
         }
 
@@ -172,19 +189,17 @@
             animation: float-continuous 3s ease-in-out infinite;
         }
         
-        /* Staggered Floating for Grid */
         .splash-icon-wrapper:nth-child(1) { animation-delay: 0s; }
-        .splash-icon-wrapper:nth-child(2) { animation-delay: 0.3s; } /* Top Right */
-        .splash-icon-wrapper:nth-child(3) { animation-delay: 0.6s; } /* Bottom Left */
-        .splash-icon-wrapper:nth-child(4) { animation-delay: 0.9s; } /* Bottom Right */
+        .splash-icon-wrapper:nth-child(2) { animation-delay: 0.3s; }
+        .splash-icon-wrapper:nth-child(3) { animation-delay: 0.6s; }
+        .splash-icon-wrapper:nth-child(4) { animation-delay: 0.9s; }
 
         .splash-icon-bg {
-            width: 64px; /* Slightly larger for grid look */
+            width: 64px;
             height: 64px;
-            /* Glassmorphism */
             background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(12px);
-            border-radius: 24px; /* Squircle */
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -207,6 +222,10 @@
         @keyframes expand-fill {
             0% { width: 0; height: 0; opacity: 1; }
             100% { width: 300vmax; height: 300vmax; opacity: 1; }
+        }
+
+        @keyframes fade-out {
+            to { opacity: 0; transform: scale(0.5); }
         }
 
         @keyframes content-reveal {
@@ -262,19 +281,30 @@
   <body>
     <!-- CUSTOM ANIMATED SPLASH SCREEN -->
     <div id="splash-screen">
-        <!-- 1. The Expandable Blue Circle -->
+        <!-- 1. The Expandable GREEN Circle -->
         <div id="color-expander"></div>
         
-        <!-- 2. The Content on Blue Screen (CENTERED) -->
+        <!-- 2. The CODE-BASED LOGO (Replaces image file) -->
+        <div id="initial-logo-svg">
+            <!-- School Icon SVG -->
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 22v-4a2 2 0 1 0-4 0v4"/>
+                <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/>
+                <path d="M18 5v17"/>
+                <path d="m4 6 8-4 8 4"/>
+                <path d="M6 5v17"/>
+                <circle cx="12" cy="9" r="2"/>
+            </svg>
+        </div>
+        
+        <!-- 3. The Content on Green Screen -->
         <div id="splash-content">
             <h1 id="app-title">VidyaSetu AI</h1>
             
             <div id="feature-icons">
-                
-                <!-- 1. GPS Tracking (Bus + Pin) -->
+                <!-- 1. Live GPS -->
                 <div class="splash-icon-wrapper">
                     <div class="splash-icon-bg">
-                        <!-- Bus Body -->
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="6" width="20" height="10" rx="2" fill="rgba(255,255,255,0.2)"/> 
                             <path d="M4 16v2a1 1 0 0 0 1 1h1"/>
@@ -287,7 +317,7 @@
                     <span class="splash-label">Live GPS</span>
                 </div>
                 
-                <!-- 2. Result/Report -->
+                <!-- 2. Result -->
                 <div class="splash-icon-wrapper">
                     <div class="splash-icon-bg">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
